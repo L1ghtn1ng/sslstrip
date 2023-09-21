@@ -1,6 +1,6 @@
 setuptools==68.2.1
 Twisted==23.8.0
 pyopenssl==23.2.0
-cryptography==41.0.3
+cryptography==41.0.4
 service_identity==23.1.0
 black==23.9.1
