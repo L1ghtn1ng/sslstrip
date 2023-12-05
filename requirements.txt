@@ -1,4 +1,4 @@
-setuptools==68.2.1
+setuptools==69.0.2
 Twisted==23.10.0
 pyopenssl==23.3.0
 cryptography==41.0.3
