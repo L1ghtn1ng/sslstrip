@@ -22,10 +22,25 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ruff",
+    "mypy"
 ]
 
 [project.scripts]
 sslstrip = "sslstrip:main"
+
+[tool.mypy]
+python_version = "3.12"
+warn_unused_configs = true
+ignore_missing_imports = true
+show_traceback = true
+show_error_codes = true
+namespace_packages = true
+
+[tool.uv]
+python-preference = "managed"
+
+[tool.uv.pip]
+python-version = "3.12"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -66,7 +81,7 @@ select = ["E4",
     "RUF",
     "PT",
     ]
-ignore = ["S311", "RUF012", "RUF021", "RUF029", "F841"]
+ignore = []
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]

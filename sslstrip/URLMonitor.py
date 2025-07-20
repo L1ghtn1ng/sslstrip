@@ -16,6 +16,7 @@
 #
 
 import re
+from typing import ClassVar
 
 
 class URLMonitor:
@@ -25,7 +26,7 @@ class URLMonitor:
     """
 
     # Start the arms race, and end up here...
-    javascriptTrickery = [re.compile(r'http://.+\.etrade\.com/javascript/omntr/tc_targeting\.html')]
+    javascriptTrickery: ClassVar[list] = [re.compile(r'http://.+\.etrade\.com/javascript/omntr/tc_targeting\.html')]
     _instance = None
 
     def __init__(self):
