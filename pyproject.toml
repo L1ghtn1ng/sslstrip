@@ -1,6 +1,31 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "sslstrip"
+version = "4.0"
+description = "A MITM tool that implements Moxie Marlinspike's HTTPS stripping attacks."
+authors = [
+    {name = "Moxie Marlinspike", email = "moxie@thoughtcrime.org"}
+]
+license = {text = "GPL"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Twisted==25.5.0",
+    "pyopenssl==25.1.0",
+    "cryptography==45.0.5",
+    "service_identity==24.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+]
+
+[project.scripts]
+sslstrip = "sslstrip:main"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -26,7 +51,7 @@ exclude = [
 ]
 
 line-length = 130
-target-version = "py311"
+target-version = "py312"
 show-fixes = true
 
 [tool.ruff.lint]

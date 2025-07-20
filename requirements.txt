@@ -1,6 +1,0 @@
-setuptools==75.3.0
-Twisted==24.10
-pyopenssl==24.2.1
-cryptography==43.0.3
-service_identity==24.1.0
-ruff

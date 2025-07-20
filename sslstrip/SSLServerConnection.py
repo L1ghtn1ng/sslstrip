@@ -52,9 +52,9 @@ class SSLServerConnection(ServerConnection):
     def post_prefix(self):
         return 'SECURE POST'
 
-    def handle_header(self, key, value):
+    def handleHeader(self, key, value):
         if key.lower() == 'set-cookie':
-            value = self.cookieExpression.sub('\g<1>', value)
+            value = self.cookieExpression.sub(r'\g<1>', value)
         super().handleHeader(key, value)
 
     @staticmethod

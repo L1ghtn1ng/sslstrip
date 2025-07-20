@@ -52,12 +52,12 @@ class ClientRequest(Request):
             return
 
         if not result or not result[0]:
-            logging.warning(f"Could not resolve host: {self.getHeader('host')}")
+            logging.warning(f'Could not resolve host: {self.getHeader("host")}')
             self.finish()
             return
 
         address = result[0][0].payload.address
-        logging.debug(f"Resolved host successfully: {self.getHeader('host')} -> {address}")
+        logging.debug(f'Resolved host successfully: {self.getHeader("host")} -> {address}')
         host = self.getHeader('host')
         headers = self.cleanHeaders()
         client = self.getClientIP()
@@ -103,7 +103,7 @@ class ClientRequest(Request):
             return self.resolver.lookupAddress(host)
 
     def process(self):
-        logging.debug(f"Resolving host: {self.getHeader('host')}")
+        logging.debug(f'Resolving host: {self.getHeader("host")}')
         host = self.getHeader('host')
         deferred = self.resolveHost(host)
         deferred.addCallback(self.handleHostResolved)

@@ -18,7 +18,7 @@
 import gzip
 import logging
 import re
-from io import StringIO
+from io import BytesIO
 
 from twisted.web.http import HTTPClient
 
@@ -64,21 +64,21 @@ class ServerConnection(HTTPClient):
         self.endHeaders()
 
     def send_post_data(self):
-        logging.warning(f"{self.post_prefix} Data ({self.headers['host']}):\n{self.postData!s}")
+        logging.warning(f'{self.post_prefix} Data ({self.headers["host"]}):\n{self.postData!s}')
         self.transport.write(self.postData)
 
-    def connection_made(self):
+    def connectionMade(self):
         logging.log(self.log_level, 'HTTP connection made.')
         self.send_request()
         self.send_headers()
         if self.command == 'POST':
             self.send_post_data()
 
-    def handle_status(self, version, code, message):
+    def handleStatus(self, version, code, message):
         logging.log(self.log_level, f'Got server response: {version} {code} {message}')
         self.client.setResponseCode(int(code), message)
 
-    def handle_header(self, key, value):
+    def handleHeader(self, key, value):
         logging.log(self.log_level, f'Got server header: {key}:{value}')
         value = self.replace_secure_links(value) if key.lower() == 'location' else value
         self.set_image_request(value) if key.lower() == 'content-type' else value
@@ -99,22 +99,22 @@ class ServerConnection(HTTPClient):
             logging.debug('Response is compressed...')
             self.isCompressed = True
 
-    def handle_end_headers(self):
+    def handleEndHeaders(self):
         if self.isImageRequest and self.contentLength is not None:
             self.client.setHeader('Content-Length', self.contentLength)
         if not self.length:
             self.shutdown()
 
-    def handle_response_part(self, data):
+    def handleResponsePart(self, data):
         self.client.write(data) if self.isImageRequest else super().handleResponsePart(data)
 
-    def handle_response_end(self):
+    def handleResponseEnd(self):
         self.shutdown() if self.isImageRequest else super().handleResponseEnd()
 
     def handle_response(self, data):
         if self.isCompressed:
             logging.debug('Decompressing content...')
-            data = gzip.GzipFile('', 'rb', 9, StringIO(data)).read()
+            data = gzip.GzipFile('', 'rb', 9, BytesIO(data)).read()
 
         logging.log(self.log_level, f'Read from server:\n{data}')
 

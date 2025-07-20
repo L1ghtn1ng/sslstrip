@@ -4,13 +4,17 @@ Ported from Python v2 to v3 by Jay Townsend (theHarvester, Discover, and DNSreco
 * [![Twitter Follow](https://img.shields.io/twitter/follow/jay_townsend1.svg?style=social&label=Follow)](https://twitter.com/jay_townsend1) Jay "L1ghtn1ng" Townsend @jay_townsend1
 
 Requirements:  
-   ```pip3 install -r requirements.txt```  
-Install the requirements in a virtualenv
+   This project uses **uv** for dependency management.
+   Get **uv** from [here](https://docs.astral.sh/uv/getting-started/installation/) 
+
+Install the dependencies in a virtual environment
+
+```uv sync```
    
 Running:  
    sslstrip can be run from the source base without installation.  
    Run as a normal user to see options.  
-   ```python3 sslstrip.py -h```
+   ```uv run sslstrip.py -h```
 
    1. As root, enable IP forwarding:<br>
       ```echo "1" > /proc/sys/net/ipv4/ip_forward```

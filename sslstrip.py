@@ -37,7 +37,7 @@ from sslstrip.URLMonitor import URLMonitor
 
 
 class SSLStripConfig:
-    VERSION = '3.0'
+    VERSION = '4.0'
     DEFAULT_LOGFILE = 'sslstrip.log'
     DEFAULT_LOGLEVEL = logging.WARNING
     DEFAULT_LISTEN_PORT = 10000
