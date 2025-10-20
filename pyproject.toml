@@ -14,7 +14,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "Twisted==25.5.0",
-    "pyopenssl==25.1.0",
+    "pyopenssl==25.3.0",
     "cryptography==46.0.3",
     "service_identity==24.1.0",
 ]
