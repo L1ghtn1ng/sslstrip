@@ -21,7 +21,7 @@ uv sync
 ## Usage
 
 ```sh
-$ python3 sslstrip.py
+$ uv run sslstrip.py
 usage: sslstrip.py [-h] [-w WRITE] [-p] [-s] [-a]
                    [-l LISTEN] [-f] [-k]
 
@@ -52,7 +52,7 @@ options:
 
 To run as a normal user to see options:
 
-`python3 sslstrip.py -h`
+`uv run sslstrip.py -h`
 
 ### Running as root user
 
