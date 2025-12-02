@@ -16,7 +16,9 @@
 # USA
 #
 
-from twisted.web.http import HTTPChannel
+
+from twisted.web.http import HTTPChannel, Request
+
 from sslstrip.ClientRequest import ClientRequest
 
 
@@ -27,4 +29,4 @@ class StrippingProxy(HTTPChannel):
     the (connection, client_address) tuple in our cache.
     """
 
-    requestFactory = ClientRequest
+    requestFactory: type[Request] = ClientRequest

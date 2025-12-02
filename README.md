@@ -8,10 +8,15 @@ Ported from Python v2 to v3 by Jay Townsend (theHarvester, Discover, and DNSreco
 
 ## Requirements
 
-`pip3 install -r requirements.txt`
-
 > [!NOTE]
-> Install the requirements in a virtual environment (`venv`).
+> This project uses **uv** for dependency management.
+> Get **uv** from [here](https://docs.astral.sh/uv/getting-started/installation/). 
+
+Install the dependencies in a virtual environment:
+
+```sh
+uv sync
+```
 
 ## Usage
 

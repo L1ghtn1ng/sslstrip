@@ -16,9 +16,6 @@
 # USA
 #
 
-import logging
-import string
-
 
 class CookieCleaner:
     """This class cleans cookies we haven't seen before.  The basic idea is to
@@ -57,7 +54,7 @@ class CookieCleaner:
         self.enabled = enabled
 
     def is_clean(self, method, client, host, headers):
-        if method == "POST" or not self.enabled or not self.has_cookies(headers):
+        if method == 'POST' or not self.enabled or not self.has_cookies(headers):
             return True
         return (client, self.get_domain_for(host)) in self.cleaned_cookies
 
@@ -66,34 +63,32 @@ class CookieCleaner:
         self.cleaned_cookies.add((client, domain))
 
         expire_headers = []
-        for cookie in headers["cookie"].split(";"):
-            cookie = cookie.split("=")[0].strip()
-            expire_headers.extend(
-                self.get_expire_cookie_string_for(cookie, host, domain, path)
-            )
+        for cookie in headers['cookie'].split(';'):
+            cookie = cookie.split('=')[0].strip()
+            expire_headers.extend(self.get_expire_cookie_string_for(cookie, host, domain, path))
 
         return expire_headers
 
     @staticmethod
     def has_cookies(headers):
-        return "cookie" in headers
+        return 'cookie' in headers
 
     @staticmethod
     def get_domain_for(host):
-        host_parts = host.split(".")
-        return "." + host_parts[-2] + "." + host_parts[-1]
+        host_parts = host.split('.')
+        return '.' + host_parts[-2] + '.' + host_parts[-1]
 
     @staticmethod
     def get_expire_cookie_string_for(self, cookie, host, domain, path):
-        path_list = path.split("/")
+        path_list = path.split('/')
         expire_strings = []
 
-        base_str_format = f"{cookie}=EXPIRED;Path={{}};Domain={{}};Expires=Mon, 01-Jan-1990 00:00:00 GMT\r\n"
-        expire_strings.append(base_str_format.format("/", domain))
-        expire_strings.append(base_str_format.format("/", host))
+        base_str_format = f'{cookie}=EXPIRED;Path={{}};Domain={{}};Expires=Mon, 01-Jan-1990 00:00:00 GMT\r\n'
+        expire_strings.append(base_str_format.format('/', domain))
+        expire_strings.append(base_str_format.format('/', host))
 
         if len(path_list) > 2:
-            path_sub_part = "/" + path_list[1]
+            path_sub_part = '/' + path_list[1]
             expire_strings.append(base_str_format.format(path_sub_part, domain))
             expire_strings.append(base_str_format.format(path_sub_part, host))
 

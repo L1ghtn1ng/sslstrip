@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sslstrip"
+version = "4.0"
+description = "A MITM tool that implements Moxie Marlinspike's HTTPS stripping attacks."
+authors = [
+    {name = "Moxie Marlinspike", email = "moxie@thoughtcrime.org"}
+]
+license = {text = "GPL"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Twisted==25.5.0",
+    "pyopenssl==25.3.0",
+    "cryptography==46.0.3",
+    "service_identity==24.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "mypy"
+]
+
+[project.scripts]
+sslstrip = "sslstrip:main"
+
+[tool.mypy]
+python_version = "3.12"
+warn_unused_configs = true
+ignore_missing_imports = true
+show_traceback = true
+show_error_codes = true
+namespace_packages = true
+
+[tool.uv]
+python-preference = "managed"
+
+[tool.uv.pip]
+python-version = "3.12"
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    "tests",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".mypy_cache",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".github",
+    ".venv",
+    ".vscode",
+    ".idea",
+    "__pypackages__",
+    "build",
+    "dist",
+    "site-packages",
+    "venv",
+]
+
+line-length = 130
+target-version = "py312"
+show-fixes = true
+
+[tool.ruff.lint]
+select = ["E4",
+    "E7",
+    "E9",
+    "F",
+    "I",
+    "UP",
+    "TCH",
+    "FA",
+    "RUF",
+    "PT",
+    ]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "single"
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
