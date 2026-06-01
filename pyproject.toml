@@ -16,7 +16,7 @@ dependencies = [
     "Twisted==25.5.0",
     "pyopenssl==26.2.0",
     "cryptography==48.0.0",
-    "service_identity==24.2.0",
+    "service_identity==26.1.0",
 ]
 
 [project.optional-dependencies]
