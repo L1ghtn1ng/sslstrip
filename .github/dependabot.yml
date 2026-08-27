@@ -6,6 +6,7 @@ multi-ecosystem-groups:
       interval: daily
       timezone: Europe/London
     target-branch: master
+    open-pull-requests-limit: 10
 
 updates:
   - package-ecosystem: github-actions
@@ -23,7 +24,6 @@ updates:
     multi-ecosystem-group: all-dependencies
     cooldown:
       default-days: 7
-    open-pull-requests-limit: 10
     allow:
       - dependency-type: direct
       - dependency-type: indirect
