@@ -241,6 +241,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.smoke/
 env/
 venv/
 ENV/
