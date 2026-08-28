@@ -2,7 +2,7 @@
 
 ## 5.0.0
 
-Rewrite sslstrip as a Python 3.14-only, typed, `src/`-layout Linux lab application.
+Rewrite sslstrip as a Python 3.14-only, typed, `src/`-layout Linux application.
 
 ### Added
 
