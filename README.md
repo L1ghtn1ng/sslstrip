@@ -1,6 +1,6 @@
 # sslstrip 5.0
 
-sslstrip is a Linux lab proxy that implements Moxie Marlinspike's HTTPS stripping attacks for **authorized testing only**. Use it only on systems and networks you own or have explicit permission to test.
+sslstrip is a Linux proxy that implements Moxie Marlinspike's HTTPS stripping attacks for **authorized testing only**. Use it only on systems and networks you own or have explicit permission to test.
 
 Ported from Python 2 to 3 by Jay Townsend, then rewritten for Python 3.14 as a typed, asynchronous Twisted application.
 
